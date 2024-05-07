@@ -15,7 +15,7 @@ app.use(function(req, res, next)
     {
         res.status(404).json({error:true, 
                               codigo: 404, 
-                              message: "cara culo"})
+                              message: "Endpoint doesnt found"})
     })
 
 app.use(errorHandling);
