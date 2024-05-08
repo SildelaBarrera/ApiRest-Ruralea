@@ -36,8 +36,8 @@ const postUserRegistro = async (request, response) =>
                 respuesta = {error: true, codigo: 200, mensaje: 'El usuario ya existe'}
             }
             else{ 
-                    let params = [request.body.tipoUSuario, request.body.nombre, request.body.apellidos, request.body. email, request.body.foto, request.body.password]
-                    let sql = "INSERT INTO usuario (tipoUSuario, nombre, apellidos, email, foto, password) " +
+                    let params = [request.body.tipoUsuario, request.body.nombre, request.body.apellidos, request.body. email, request.body.foto, request.body.password]
+                    let sql = "INSERT INTO usuario (tipoUsuario, nombre, apellidos, email, foto, password) " +
                     "VALUES (?, ?, ?, ?, ?, ?)"
                 
                     let[result] = await connection.promise().query(sql, params);
