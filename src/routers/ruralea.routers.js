@@ -2,9 +2,9 @@ const {Router} = require ("express")
 const router = Router();
 const usersCtrl = require("../controller/usuario.controller")
 
-// router.get("/", usersCtrl.getStart);
+router.post("/registro", usersCtrl.postUserRegistro);
 
-// router.get("/usuario", usersCtrl.getUser);
+// router.get("/usuario", usersCtrl.getBooks);
 
 // router.get("/usuario/:name", usersCtrl.getUser2);
         
