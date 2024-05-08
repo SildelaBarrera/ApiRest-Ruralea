@@ -9,7 +9,7 @@ const postLogin = async (request, response) =>
             
             if (result[0] != undefined){
                 if (result[0].contraseña == request.body.contraseña){
-                    respuesta = {error: false, codigo: 200, mensaje: 'Usuario logueado', dato: result[0]}
+                    respuesta = {error: false, codigo: 200, mensaje: 'Usuario logueado', datoUsuario: result[0]}
                 }
                 else{
                     respuesta = {error: true, codigo: 200, mensaje: 'Email o contraseña incorrecta'}
@@ -33,7 +33,7 @@ const postUserRegistro = async (request, response) =>
             let sql = "SELECT email FROM usuario WHERE email = ?";
             let [result] = await connection.promise().query(sql, params )   
             if( result[0] != undefined){
-                respuesta = {error: true, codigo: 200, message: 'El usuario ya existe'}
+                respuesta = {error: true, codigo: 200, mensaje: 'El usuario ya existe'}
             }
             else{ 
                     let params = [request.body.tipoUsuario, request.body.nombre, request.body.apellidos, request.body. email, request.body.foto, request.body.contraseña]
@@ -42,7 +42,7 @@ const postUserRegistro = async (request, response) =>
                 
                     let[result] = await connection.promise().query(sql, params);
                     console.log(result);
-                    respuesta = {error: false, codigo: 200, message: 'Usuario registrado correctamente.', datoUsuario: result[0]}
+                    respuesta = {error: false, codigo: 200, mensaje: 'Usuario registrado correctamente.', datoUsuario: result[0]}
                     response.send(respuesta)
             }
             response.send(respuesta)
