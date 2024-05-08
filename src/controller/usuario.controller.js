@@ -3,12 +3,12 @@ const {connection} = require('../database')
 const postLogin = async (request, response) =>
     {
         try{
-            let sql = "SELECT id_usuario, tipoUsuario, nombre, apellidos, email, foto, contraseña FROM usuario WHERE email= ?"
+            let sql = "SELECT id_usuario, tipoUsuario, nombre, apellidos, email, foto, password FROM usuario WHERE email= ?"
             let [result] = await connection.promise().query(sql, request.body.email)
             console.log(result[0]);
             
             if (result[0] != undefined){
-                if (result[0].contraseña == request.body.contraseña){
+                if (result[0].contraseña == request.body.password){
                     respuesta = {error: false, codigo: 200, mensaje: 'Usuario logueado', datoUsuario: result[0]}
                 }
                 else{
