@@ -10,13 +10,13 @@ const postUserRegistro = async (request, response) =>
                 respuesta = {error: true, codigo: 200, message: 'El usuario ya existe'}
             }
             else{ 
-                    let params = [request.body.tipoUsuario, request.body.nombre, request.body.apellidos, request.body. email, request.body.foto, request.body.contraseña]
-                    let sql = "INSERT INTO usuario (tipoUsuario, nombre, apellidos, email, foto, contraseña) " +
+                    let params = [request.body.tipoUSuario, request.body.nombre, request.body.apellidos, request.body. email, request.body.foto, request.body.password]
+                    let sql = "INSERT INTO usuario (tipoUSuario, nombre, apellidos, email, foto, password) " +
                     "VALUES (?, ?, ?, ?, ?, ?)"
                 
                     let[result] = await connection.promise().query(sql, params);
                     console.log(result);
-                    respuesta = {error: false, codigo: 200, message: 'Usuario registrado correctamente.', dataUsuario: result[0]}
+                    respuesta = {error: false, codigo: 200, mensaje: 'Usuario registrado correctamente.', dataUsuario: result[0]}
                     response.send(respuesta)
             }
             response.send(respuesta)
