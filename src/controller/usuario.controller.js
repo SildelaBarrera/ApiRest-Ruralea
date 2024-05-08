@@ -8,7 +8,8 @@ const postLogin = async (request, response) =>
             console.log(result[0]);
             
             if (result[0] != undefined){
-                if (result[0].contraseña == request.body.password){
+                if (result[0].password == request.body.password){
+                    
                     respuesta = {error: false, codigo: 200, mensaje: 'Usuario logueado', datoUsuario: result[0]}
                 }
                 else{
