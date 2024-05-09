@@ -9,7 +9,7 @@ router.post("/login", usersCtrl.postLogin);
 
 router.post("/registro", usersCtrl.postUserRegistro);
 
-// router.get("/", usersCtrl.getStart);
+router.get("/misEventos", eventosCtrl.getEventos);
 
 // router.get("/usuario", usersCtrl.getBooks);
 
