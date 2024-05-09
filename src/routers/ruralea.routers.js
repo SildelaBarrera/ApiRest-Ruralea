@@ -11,6 +11,8 @@ router.post("/registro", usersCtrl.postUserRegistro);
 
 router.get("/misEventos", eventosCtrl.getEventos);
 
+router.post("/nuevoEvento", eventosCtrl.postEvento);
+
 // router.get("/usuario", usersCtrl.getBooks);
 
 // router.get("/usuario/:name", usersCtrl.getUser2);
