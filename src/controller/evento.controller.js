@@ -11,10 +11,10 @@ const getEventos = async (request,response) =>
                 params = [request.query.id_usuario]
                 console.log(params);
                 let [result] = await connection.promise().query(sql, params);
-                console.log(result);
                         
                 if (result.length >= 1){
-                    respuesta = {error: false, codigo: 200, mensaje: "Estos son los eventos", dataEventos: result};    
+                    respuesta = {error: false, codigo: 200, mensaje: "Estos son los eventos", datoEventos: result};
+                    console.log(respuesta.datoEventos)    
                 }else {
                     respuesta = {error: false, codigo: 200, mensaje: "No hay eventos"};    
                 }
