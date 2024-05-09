@@ -1,16 +1,19 @@
 const {Router} = require ("express")
 const router = Router();
 const usersCtrl = require("../controller/usuario.controller")
+const eventosCtrl = require("../controller/evento.controller")
 const reservaCtrl = require("../controller/reserva.controller")
-const eventoCtrl = require("../controller/evento.controller")
+
 
 router.post("/login", usersCtrl.postLogin);
 
 router.post("/registro", usersCtrl.postUserRegistro);
 
-router.get("/misReservas", reservaCtrl.getReservas);
+router.get("/misEventos", eventosCtrl.getEventos);
 
-router.get("/actividades", eventoCtrl.getActividades);
+router.post("/nuevoEvento", eventosCtrl.postEvento);
+
+router.get("/actividades", eventosCtrl.getActividades);
 
 //router.get("/actividades", eventoCtrl.getAllActividades); 
         
