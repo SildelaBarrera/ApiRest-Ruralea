@@ -18,8 +18,10 @@ router.get("/actividades", eventosCtrl.getActividades);
 router.get("/misReservas", reservaCtrl.reservarEvento); 
         
 router.delete("/misReservas", reservaCtrl.borrarReserva);
+
+router.delete("/misEventos", eventosCtrl.borrarEvento);
         
-router.put("/modificarEvento", eventosCtrl.putEvento); 
+router.put("/misEventos", eventosCtrl.putEvento); 
 
 module.exports = router;
 

@@ -63,7 +63,7 @@ const postEvento = async (request, response) =>
         try{
             
             let params = [request.body.titulo, request.body.categoria, request.body.fecha, request.body.municipio, 
-                request.body.provincia, request.body.aforo, request.body.precio, request.body.descripcion, request.body.foto, request.body.id_evento];
+                request.body.provincia, request.body.aforo, request.body.precio, request.body.descripcion, request.body.foto, request.body.id_usuario];
             
             let sql = "INSERT INTO evento (titulo, categoria, fecha, municipio, provincia, aforo, precio, descripcion, foto, id_usuario)" +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -136,5 +136,26 @@ const postEvento = async (request, response) =>
                 console.log(error);
             }
         }
+    
+    const borrarEvento = async (request, response) =>{             
+        try{                          
+            let params = [request.query.id_usuario, request.query.id_evento]
+            let sql = "DELETE FROM evento WHERE evento.id_usuario = ? AND evento.id_evento = ?";
+            [result] = await connection.promise().query(sql, params)
+            
+            if(result.affectedRows == 0){
+                respuesta = {error: true, codigo: 200, mensaje: 'No existe el evento'}
+            } 
+            else { 
+                respuesta = {error: false, codigo: 200, mensaje: 'Evento borrado correctamente', datoEventos: result}
+                console.log(result);
+            }
+            response.send(respuesta)
 
-    module.exports = {getEventos, postEvento, getActividades, putEvento}
+        } 
+        catch (error){
+            console.error("no existe la actividad", error);  
+        }            
+    }
+
+    module.exports = {getEventos, postEvento, getActividades, putEvento, borrarEvento}
