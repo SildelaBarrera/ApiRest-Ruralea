@@ -19,7 +19,7 @@ router.get("/misReservas", reservaCtrl.reservarEvento);
         
 router.delete("/misReservas", reservaCtrl.borrarReserva);
         
-// router.delete("/usuario", usersCtrl.deleteUser); 
+router.put("/modificarEvento", eventosCtrl.modificarEvento); 
 
 module.exports = router;
 
