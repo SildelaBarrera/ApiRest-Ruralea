@@ -15,9 +15,9 @@ router.post("/nuevoEvento", eventosCtrl.postEvento);
 
 router.get("/actividades", eventosCtrl.getActividades);
 
-//router.get("/actividades", eventoCtrl.getAllActividades); 
+router.get("/misReservas", reservaCtrl.reservarEvento); 
         
-// router.put("/usuario", usersCtrl.putUser);
+router.delete("/misReservas", reservaCtrl.borrarReserva);
         
 // router.delete("/usuario", usersCtrl.deleteUser); 
 
