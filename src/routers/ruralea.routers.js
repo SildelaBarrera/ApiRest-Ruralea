@@ -15,11 +15,11 @@ router.post("/nuevoEvento", eventosCtrl.postEvento);
 
 router.get("/actividades", eventosCtrl.getActividades);
 
-//router.get("/actividades", eventoCtrl.getAllActividades); 
+router.get("/misReservas", reservaCtrl.reservarEvento); 
         
-router.put("/modificarEvento", eventosCtrl.putEvento);
+router.delete("/misReservas", reservaCtrl.borrarReserva);
         
-// router.delete("/usuario", usersCtrl.deleteUser); 
+router.put("/modificarEvento", eventosCtrl.putEvento); 
 
 module.exports = router;
 
