@@ -17,7 +17,7 @@ router.get("/actividades", eventosCtrl.getActividades);
 
 //router.get("/actividades", eventoCtrl.getAllActividades); 
         
-// router.put("/usuario", usersCtrl.putUser);
+router.put("/modificarEvento", eventosCtrl.putEvento);
         
 // router.delete("/usuario", usersCtrl.deleteUser); 
 
