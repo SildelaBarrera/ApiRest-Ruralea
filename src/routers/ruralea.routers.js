@@ -23,6 +23,10 @@ router.delete("/misEventos", eventosCtrl.borrarEvento);
         
 router.put("/misEventos", eventosCtrl.putEvento); 
 
+router.put("/perfil", usersCtrl.putUsuario);
+
+
+
 module.exports = router;
 
 
