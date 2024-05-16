@@ -60,9 +60,6 @@ const putUsuario = async (request, response) =>
         console.log("params", request.body.id_usuario)
         let sql = "SELECT id_usuario FROM usuario WHERE id_usuario = ?"
         let [result] = await connection.promise().query(sql, params)
-
-        console.log("1º", result)
-        console.log("2º", result[0])
         
         if(result[0] != undefined){
             if (request.body.nombre == ""){
