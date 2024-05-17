@@ -1,22 +1,46 @@
 const {connection} = require('../database')
 
+// const getChats = async (request, response) => {
+//     try{
+//         let sql;
+//         let params;
+//         let result;
+
+//         if(request.query.id_usuario1 != null){
+//             sql= "SELECT id_chat FROM chat WHERE id_usuario1 = ?" 
+//             params = [request.query.id_usuario1]
+//             console.log(params);
+//             [result] = await connection.promise().query(sql, params);
+//             console.log(result)
+
+//             respuesta = {error: false, codigo: 200, mensaje: 'Estos son los chats', datoChats: result}  
+//         }
+//         else {
+//             respuesta = {error: true, codigo: 200, mensaje: 'No hay mensajes'}  
+//         }
+//         response.send(result);     
+//     }
+//     catch(error){
+//         console.log(error);
+//     }
+// }
 const getChats = async (request, response) => {
     try{
         let sql;
         let params;
         let result;
 
-        if(request.query.id_usuario1 != null){
-            sql= "SELECT id_chat FROM chat WHERE id_usuario1 = ?" 
-            params = [request.query.id_usuario1]
+        if(request.query.id_chat != null){
+            sql= "SELECT * FROM mensaje JOIN chat ON (mensaje.id_chat = chat.id_chat) WHERE mensaje.id_chat = ?" 
+            params = [request.query.id_chat]
             console.log(params);
             [result] = await connection.promise().query(sql, params);
             console.log(result)
 
-            respuesta = {error: false, codigo: 200, mensaje: 'Estos son los chats', datoChats: result}  
+            respuesta = {error: false, codigo: 200, mensaje: 'Este es el chat', datoChats: result}  
         }
         else {
-            respuesta = {error: true, codigo: 200, mensaje: 'No hay mensajes'}  
+            respuesta = {error: true, codigo: 200, mensaje: 'No se encuentra el chat'}  
         }
         response.send(result);     
     }
@@ -24,7 +48,6 @@ const getChats = async (request, response) => {
         console.log(error);
     }
 }
-
 // const getMensaje = async (request, response) => {
 //     try{
 //         let sql;
