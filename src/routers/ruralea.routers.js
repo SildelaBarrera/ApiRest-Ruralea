@@ -25,13 +25,13 @@ router.put("/misEventos", eventosCtrl.putEvento);
 
 router.put("/perfil", usersCtrl.putUsuario);
 
-router.get("/miChat", mensajesCtrl.getChats);
+// router.get("/miChat", mensajesCtrl.getChats);
 
-router.post("/nuevoChat", mensajesCtrl.postChat);
+// router.post("/nuevoChat", mensajesCtrl.postChat);
 
-router.get("/chat", mensajesCtrl.getMensajes);
+// router.get("/chat", mensajesCtrl.getMensajes);
 
-router.post("/chat", mensajesCtrl.postMensaje);
+// router.post("/chat", mensajesCtrl.postMensaje);
 
 
 

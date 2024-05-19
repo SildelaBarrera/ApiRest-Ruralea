@@ -6,25 +6,42 @@ const getActividades = async (request, response) => {
         let params;
         let sql;
 
-        if (request.query.provincia != "") {
-            params = [request.query.categoria, request.query.provincia];
-            sql = "SELECT * FROM evento WHERE categoria = ? AND provincia = ?";
-            let [result] = await connection.promise().query(sql, params);
-            if (result[0] == null) {
-                respuesta = { error: true, codigo: 200, mensaje: 'No hay actividades' };
-            } else {
-                respuesta = { error: false, codigo: 200, mensaje: 'Estas son las actividades', datoEventos: result };
+        if (request.query.categoria !='Ver todas las actividades' && request.query.categoria !='Elige una categoría') {
+            if (request.query.categoria != 'Ver todas las actividades' && request.query.categoria !='Elige una categoría' && request.query.provincia == "") {
+                params = [request.query.categoria];
+                sql = "SELECT * FROM evento WHERE categoria = ?";
+                let [result] = await connection.promise().query(sql, params);
+                
+                if (result[0] == null) {
+                    respuesta = { error: true, codigo: 200, mensaje: 'No hay actividades' };
+                } else {
+                    respuesta = { error: false, codigo: 200, mensaje: 'Estas son las actividades', datoEventos: result };
+                }
+            } 
+            else if (request.query.categoria != 'Ver todas las actividades' && request.query.categoria !='Elige una categoría' && request.query.provincia != "") {
+                params = [request.query.categoria, request.query.provincia];
+                sql = "SELECT * FROM evento WHERE categoria = ? AND provincia = ?";
+                let [result] = await connection.promise().query(sql, params);
+                if (result[0] == null) {
+                    respuesta = { error: true, codigo: 200, mensaje: 'No hay actividades' };
+                } else {
+                    respuesta = { error: false, codigo: 200, mensaje: 'Estas son las actividades', datoEventos: result };
+                }
             }
-        } else if (request.query.provincia == "" && request.query.categoria == 'Ver todas las actividades' || request.query.categoria == "" || request.query.categoria == 'Elige una categoria') {
-            sql = "SELECT * FROM evento";
-            let [result] = await connection.promise().query(sql);
-            respuesta = { error: false, codigo: 200, mensaje: 'Todas las actividades', datoEventos: result };
-        } else {
-            sql = "SELECT * FROM evento";
-            let [result] = await connection.promise().query(sql);
+} 
+        else if ((request.query.categoria == 'Ver todas las actividades' || request.query.categoria == 'Elige una categoría')  && request.query.provincia != "")  {
+            params = [request.query.provincia];
+            sql = "SELECT * FROM evento WHERE provincia = ?";
+            let [result] = await connection.promise().query(sql, params);
             respuesta = { error: false, codigo: 200, mensaje: 'Todas las actividades', datoEventos: result };
         }
 
+        else if ((request.query.categoria == 'Ver todas las actividades' || request.query.categoria == 'Elige una categoría')  && request.query.provincia == "") {
+            sql = "SELECT * FROM evento";
+            let [result] = await connection.promise().query(sql);
+            respuesta = { error: false, codigo: 200, mensaje: 'Todas las actividades', datoEventos: result };
+        } 
+       
         response.send(respuesta);
     } catch (error) {
         console.log(error);
@@ -129,8 +146,8 @@ const postEvento = async (request, response) =>
                 }
                 else{
                     respuesta = {error: true, codigo: 200, mensaje: 'No existe el evento.'}
+                    response.send(respuesta); 
                 }
-                response.send(respuesta); 
             }
             catch(error){
                 console.log(error);
