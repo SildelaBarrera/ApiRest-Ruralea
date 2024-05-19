@@ -1,19 +1,5 @@
 const { connection } = require('../database')
 
-// const getUsuarios = async (request, response) => {
-//     try {
-//         if (request.query.id_usuario != null && request.query.tipoUsuario == 'Consumidor') {
-//             let params = [request.query.tipoUsuario]
-//             let sql = "SELECT * FROM usuario WHERE tipoUsuario != ? and "
-//             let [result] = await connection.promise().query(sql, params)
-//             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los usuarios Productores', datoUsuarios: result }
-//             console.log(result);
-//         }
-//         response.send(respuesta)
-//     } catch (error) {
-//         console.error("Error al reservar el evento", error);
-//     }
-// }
 
 const getChats = async (request, response) => {
     try {
@@ -47,30 +33,6 @@ const getChats = async (request, response) => {
     }
 }
 
-// const getMensaje = async (request, response) => {
-//     try{
-//         let sql;
-//         let params;
-//         let result;
-
-//         if(request.query.chat != null){
-//             sql= "SELECT mensaje FROM mensaje JOIN chat ON (chat = id_chat) WHERE chat = ?" 
-//             params = [request.query.chat]
-//             console.log(params);
-//             [result] = await connection.promise().query(sql, params);
-//             console.log(result)
-
-//             respuesta = {error: false, codigo: 200, mensaje: 'Este es el mensaje', datoMensajes: result}  
-//         }
-//         else {
-//             respuesta = {error: true, codigo: 200, mensaje: 'No hay mensajes'}  
-//         }
-//         response.send(result);     
-//     }
-//     catch(error){
-//         console.log(error);
-//     }
-// }
 const getMensajes = async (request, response) => {
     try {
         let sql;
@@ -135,9 +97,6 @@ const postChat = async (request, response) => {
         console.log(error);
     }
 }
-
-
-
 
 module.exports = { getMensajes, postMensaje, postChat, getChats }
 

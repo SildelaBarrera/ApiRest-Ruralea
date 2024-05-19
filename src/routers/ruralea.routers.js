@@ -23,10 +23,12 @@ router.put("/misReservas", reservaCtrl.actualizarAforoAlBorrar)
 router.put("/actividades", reservaCtrl.actualizarAforo)
         
 router.delete("/misReservas", reservaCtrl.borrarReserva);
+
+router.delete("/misEventos", eventosCtrl.borrarEvento);
         
 router.put("/misEventos", eventosCtrl.putEvento); 
 
-router.put("/perfilConsumidor", usersCtrl.putConsumidor)
+// router.put("/perfilConsumidor", usersCtrl.)
 
 router.get("/miChat", mensajesCtrl.getChats);
 
@@ -35,6 +37,18 @@ router.post("/nuevoChat", mensajesCtrl.postChat);
 router.get("/chat", mensajesCtrl.getMensajes);
 
 router.post("/chat", mensajesCtrl.postMensaje);
+
+router.put("/perfil", usersCtrl.putUsuario);
+
+// router.get("/miChat", mensajesCtrl.getChats);
+
+// router.post("/nuevoChat", mensajesCtrl.postChat);
+
+// router.get("/chat", mensajesCtrl.getMensajes);
+
+// router.post("/chat", mensajesCtrl.postMensaje);
+
+
 
 
 
