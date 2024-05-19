@@ -1,5 +1,19 @@
 const { connection } = require('../database')
 
+// const getUsuarios = async (request, response) => {
+//     try {
+//         if (request.query.id_usuario != null && request.query.tipoUsuario == 'Consumidor') {
+//             let params = [request.query.tipoUsuario]
+//             let sql = "SELECT * FROM usuario WHERE tipoUsuario != ? and "
+//             let [result] = await connection.promise().query(sql, params)
+//             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los usuarios Productores', datoUsuarios: result }
+//             console.log(result);
+//         }
+//         response.send(respuesta)
+//     } catch (error) {
+//         console.error("Error al reservar el evento", error);
+//     }
+// }
 
 const getChats = async (request, response) => {
     try {
@@ -9,7 +23,7 @@ const getChats = async (request, response) => {
 
         if (request.query.tipoUsuario == 'Consumidor') {
             params = [request.query.id_usuario1]
-            sql = "SELECT  distinct chat.id_chat FROM mensaje JOIN chat ON (mensaje.id_chat = chat.id_chat) JOIN usuario ON (usuario.id_usuario = mensaje.id_usuarioEmisor) WHERE chat.id_usuario1 = ?"
+            sql = "SELECT distinct chat.id_chat FROM mensaje JOIN chat ON (mensaje.id_chat = chat.id_chat) JOIN usuario ON (usuario.id_usuario = mensaje.id_usuarioEmisor) WHERE chat.id_usuario1 = ?"
             console.log(params);
             [result] = await connection.promise().query(sql, params);
             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los chats', datoChats: result }
@@ -41,14 +55,13 @@ const getMensajes = async (request, response) => {
         let respuesta;
 
         if (request.query.id_usuario != null) {
-            params = [request.query.id_chat, request.query.id_usuario]
+            params = [request.query.id_chat]
             sql = "SELECT * FROM mensaje JOIN chat ON (mensaje.id_chat = chat.id_chat) JOIN usuario ON (usuario.id_usuario = mensaje.id_usuarioEmisor) WHERE mensaje.id_chat = ?"
             
             console.log(params);
             [result] = await connection.promise().query(sql, params);
-            console.log(result)
-
             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los mensajes del chat', datoMensajes: result }
+            console.log(respuesta.datoMensajes)
         }
         else {
             respuesta = { error: true, codigo: 200, mensaje: 'No hay mensajes' }
@@ -97,6 +110,9 @@ const postChat = async (request, response) => {
         console.log(error);
     }
 }
+
+
+
 
 module.exports = { getMensajes, postMensaje, postChat, getChats }
 
