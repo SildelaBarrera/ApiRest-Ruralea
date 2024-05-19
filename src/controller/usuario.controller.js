@@ -53,8 +53,57 @@ const postUserRegistro = async (request, response) =>
         } 
     }
 
+    const putConsumidor = async (request, response) => {      
+            
+                try{
+                    let params =[request.body.id_usuario]
+                    let sql = "SELECT usuario.id_usuario FROM usuario WHERE usuario.id_usuario= ?"
+                    let [result] = await connection.promise().query(sql, params)
+                    
+                    console.log(result[0]);
+                    if(result[0] != undefined){
+                        if (request.body.nombre == ""){
+                            request.body.nombre = undefined;
+                        }
+                        if (request.body.apellido == ""){
+                        request.body.apelido = undefined;
+                        }
+                        if (request.body.email == ""){
+                        request.body.email = undefined;
+                        }
+                        if (request.body.foto == ""){
+                        request.body.foto = undefined;
+                        }
+                        if (request.body.password == ""){
+                            request.body.password = undefined;
+                            }
+                        params = [  
+                            request.body.nombre,
+                            request.body.apellidos,
+                            request.body.email,
+                            request.body.foto,
+                            request.body.password,
+                            request.body.id_usuario]
+                        sql = "UPDATE usuario SET nombre = COALESCE(?, nombre), apellidos = COALESCE(?, apellidos), email = COALESCE(?, email), foto = COALESCE(?, foto), password = COALESCE(?, password)"
+                         +  " WHERE usuario.id_usuario = ?;";
+                        [result] = await connection.promise().query(sql, params);
+                        console.log(result)           
+                        respuesta = {error: false, codigo: 200, mensaje: 'Usuario editado correctamente.', datoUsuario: result[0]}
+                        }
+                    else{
+                        respuesta = {error: true, codigo: 200, mensaje: 'Usuario no encontrado'}
+                    }    
+                    response.send(respuesta); 
+                }
+                catch(error){
+                    console.log(error);
+                }
+            }
     
 
-module.exports = {postLogin, postUserRegistro}
+    
+
+module.exports = {postLogin, postUserRegistro, putConsumidor}
+
 
 
