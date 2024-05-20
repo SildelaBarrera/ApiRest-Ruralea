@@ -132,7 +132,7 @@ const postChat = async (request, response) => {
             "VALUES (?, ?, ?)"
         let [result] = await connection.promise().query(sql, params);
         console.log(result);
-        respuesta = { error: false, codigo: 200, mensaje: 'Chat creado correctamente.' }
+        respuesta = { error: false, codigo: 200, mensaje: 'Chat creado correctamente.', datoChat: result }
         response.send(respuesta);
     }
     catch (error) { 
