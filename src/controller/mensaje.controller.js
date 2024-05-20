@@ -55,7 +55,7 @@ const getChats = async (request, response) => {
 
         if (request.query.tipoUsuario == 'Consumidor') {
             params = [request.query.id_usuario1]
-            sql = " SELECT distinct nombre, apellidos, evento.foto, chat.id_chat, titulo FROM chat JOIN usuario ON (chat.id_usuario2 = usuario.id_usuario) JOIN evento ON (evento.id_evento = chat.id_evento) WHERE chat.id_usuario1 = ? GROUP BY titulo"
+            sql = " SELECT distinct nombre, apellidos, evento.foto, chat.id_chat, titulo FROM chat JOIN usuario ON (chat.id_usuario2 = usuario.id_usuario) JOIN evento ON (evento.id_evento = chat.id_evento) WHERE chat.id_usuario1 = ? "
             console.log(params);
             [result] = await connection.promise().query(sql, params);
             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los chats', datoChats: result }
@@ -64,7 +64,7 @@ const getChats = async (request, response) => {
         }
         else if(request.query.tipoUsuario == 'Productor') {
             params = [request.query.id_usuario2]
-            sql = "SELECT distinct nombre, apellidos, evento.foto, chat.id_chat, titulo FROM chat JOIN usuario ON (chat.id_usuario1 = usuario.id_usuario) JOIN evento ON (evento.id_evento = chat.id_evento) WHERE chat.id_usuario2 = ? GROUP BY titulo"
+            sql = "SELECT distinct nombre, apellidos, evento.foto, chat.id_chat, titulo FROM chat JOIN usuario ON (chat.id_usuario1 = usuario.id_usuario) JOIN evento ON (evento.id_evento = chat.id_evento) WHERE chat.id_usuario2 = ? "
             console.log(params);
             [result] = await connection.promise().query(sql, params);
             respuesta = { error: false, codigo: 200, mensaje: 'Estos son los chats', datoChats: result }
