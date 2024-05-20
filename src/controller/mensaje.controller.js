@@ -140,8 +140,21 @@ const postChat = async (request, response) => {
     }
 }
 
+const deleteChat = async (request, response) => {
+    try{
+        let params = [request.query.id_chat]
+        let sql = "DELETE FROM chat WHERE chat.id_chat = ?";
+        let [result] = await connection.promise().query(sql, params)
+        respuesta = { error: false, codigo: 200, mensaje: 'Chat borrado correctamente.', datoChats: result }
+        response.send(respuesta)
+    } 
+    catch (error) { 
+        console.log(error);
+    }
+}
 
 
 
-module.exports = { getMensajes, postMensaje, postChat, getChats }
+
+module.exports = { getMensajes, postMensaje, postChat, getChats, deleteChat }
 

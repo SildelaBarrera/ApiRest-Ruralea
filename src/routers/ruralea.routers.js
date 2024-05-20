@@ -40,13 +40,8 @@ router.post("/chat", mensajesCtrl.postMensaje);
 
 router.put("/perfil", usersCtrl.putUsuario);
 
-// router.get("/miChat", mensajesCtrl.getChats);
+router.delete("/chat", mensajesCtrl.deleteChat);
 
-// router.post("/nuevoChat", mensajesCtrl.postChat);
-
-// router.get("/chat", mensajesCtrl.getMensajes);
-
-// router.post("/chat", mensajesCtrl.postMensaje);
 
 
 
